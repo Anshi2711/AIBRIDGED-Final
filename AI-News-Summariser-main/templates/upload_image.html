@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Image - AIBridged{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-4 text-primary fw-bold">
+                <i class="fas fa-image me-2"></i>Upload Image
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <label for="image_file" class="form-label">Select Image</label>
+                            <input type="file" class="form-control" id="image_file" name="image_file" accept="image/*" required>
+                            <div class="form-text">Supported formats: PNG, JPG, JPEG, GIF, BMP</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="word_count" class="form-label">Summary Length (words)</label>
+                            <input type="number" class="form-control" id="word_count" name="word_count" min="50" max="500" value="100" required>
+                            <div class="form-text">Choose between 50 and 500 words</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="language" class="form-label">Summary Language</label>
+                            <select class="form-select" id="language" name="language" required>
+                                {% for code, name in languages.items() %}
+                                <option value="{{ code }}" {% if code == 'en' %}selected{% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-gradient">
+                                <i class="fas fa-magic me-2"></i>Generate Summary
+                            </button>
+                            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.btn-gradient {
+    background: linear-gradient(90deg, #6366f1 0%, #312e81 100%);
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+.btn-gradient:hover {
+    background: linear-gradient(90deg, #312e81 0%, #6366f1 100%);
+    color: #fff;
+}
+</style>
+{% endblock %} 

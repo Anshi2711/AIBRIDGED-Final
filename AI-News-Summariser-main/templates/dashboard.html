@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - AIBridged{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-4 text-primary fw-bold">
+                <i class="fas fa-chart-line me-2"></i>Dashboard
+            </h1>
+        </div>
+    </div>
+
+    <!-- Input Selection -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <h3 class="card-title h5 mb-3">Choose Input Method</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <a href="{{ url_for('upload_article') }}" class="btn btn-gradient w-100">
+                                <i class="fas fa-link me-2"></i>URL Input
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('upload_pdf') }}" class="btn btn-gradient w-100">
+                                <i class="fas fa-file-pdf me-2"></i>PDF Input
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('upload_image') }}" class="btn btn-gradient w-100">
+                                <i class="fas fa-image me-2"></i>Image Input
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <h3 class="card-title h5 mb-3">Quick Actions</h3>
+                    <div class="d-grid gap-3">
+                        <a href="{{ url_for('recent_searches') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-history me-2"></i>View History
+                        </a>
+                        <a href="{{ url_for('feedback') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-comment me-2"></i>Give Feedback
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Searches -->
+    <div class="row">
+        <div class="col">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0">
+                    <h2 class="h5 mb-0 text-primary">
+                        <i class="fas fa-clock me-2"></i>Recent Summaries
+                    </h2>
+                </div>
+                <div class="card-body">
+                    {% if recent_searches %}
+                        <div class="list-group list-group-flush">
+                            {% for search in recent_searches|reverse %}
+                            <a href="{{ url_for('view_article', id=search.id) }}" 
+                               class="list-group-item list-group-item-action border-0">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ search.title }}</h5>
+                                    <small class="text-muted">{{ search.date }}</small>
+                                </div>
+                                <p class="mb-1 text-muted">
+                                    <i class="fas fa-language me-1"></i>{{ search.article_language }} → {{ search.summary_language }}
+                                </p>
+                                <small class="text-muted">
+                                    <i class="fas fa-text-width me-1"></i>{{ search.word_count }} words
+                                </small>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted text-center my-4">No recent summaries found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.btn-gradient {
+    background: linear-gradient(90deg, #6366f1 0%, #312e81 100%);
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+.btn-gradient:hover {
+    background: linear-gradient(90deg, #312e81 0%, #6366f1 100%);
+    color: #fff;
+}
+</style>
+{% endblock %} 

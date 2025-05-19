@@ -1,0 +1,48 @@
+[
+    {
+        "rating": "5",
+        "type": "bug",
+        "message": "great app ",
+        "date": "2025-05-18 16:32:29"
+    },
+    {
+        "id": 2,
+        "email": "yashdhiman2428@gmail.com",
+        "rating": "5",
+        "type": "bug",
+        "message": "hi ",
+        "date": "2025-05-18 17:34:48"
+    },
+    {
+        "id": 3,
+        "email": "yashdhiman2428@gmail.com",
+        "rating": "5",
+        "type": "bug",
+        "message": "slow upload speed or sometimes article not found ",
+        "date": "2025-05-18 17:35:24"
+    },
+    {
+        "id": 4,
+        "email": "yashdhiman2428@gmail.com",
+        "rating": "5",
+        "type": "other",
+        "message": "amazing app!",
+        "date": "2025-05-18 17:47:13"
+    },
+    {
+        "id": 5,
+        "email": "yashdhiman2428@gmail.com",
+        "rating": "5",
+        "type": "praise",
+        "message": "amazing app it is!",
+        "date": "2025-05-18 17:50:59"
+    },
+    {
+        "id": 6,
+        "email": "admin@gmail.com",
+        "rating": "5",
+        "type": "feature",
+        "message": "can you add interactive ui\r\n",
+        "date": "2025-05-18 18:33:17"
+    }
+]

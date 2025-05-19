@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Login - AIBridged{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">Login</h2>
+                    
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    
+                    <form method="POST" action="{{ url_for('login') }}">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" required
+                                   placeholder="Enter your email (e.g., admin@gmail.com)">
+                            <div class="form-text">Use any email ending with gmail.com, outlook.com, yahoo.com, or hotmail.com</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required
+                                   placeholder="Enter password">
+                            <div class="form-text">Use 'admin' as the password</div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

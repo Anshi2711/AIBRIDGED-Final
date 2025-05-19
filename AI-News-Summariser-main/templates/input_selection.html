@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Choose Input Method - AIBridged{% endblock %}
+
+{% block content %}
+<!-- Debug output -->
+<!-- {{ url_for('input_selection') }} -->
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card border-0">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4 text-primary fw-bold">
+                    <i class="fas fa-file-alt me-2"></i>Choose Input Method
+                </h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <a href="{{ url_for('upload_article') }}" class="text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm hover-card">
+                                <div class="card-body text-center p-4">
+                                    <i class="fas fa-link fa-3x text-primary mb-3"></i>
+                                    <h3 class="card-title h5">URL Input</h3>
+                                    <p class="card-text text-muted">Summarize content from a web URL</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{ url_for('upload_pdf') }}" class="text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm hover-card">
+                                <div class="card-body text-center p-4">
+                                    <i class="fas fa-file-pdf fa-3x text-primary mb-3"></i>
+                                    <h3 class="card-title h5">PDF Input</h3>
+                                    <p class="card-text text-muted">Upload and summarize a PDF document</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hover-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+</style>
+{% endblock %} 

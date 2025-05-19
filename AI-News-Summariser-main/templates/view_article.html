@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} - AIBridged{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="card-title mb-0 text-primary fw-bold">
+                        <i class="fas fa-brain me-2"></i>{{ article.title }}
+                    </h2>
+                    <span class="badge bg-primary">
+                        <i class="fas fa-calendar me-1"></i>{{ article.date }}
+                    </span>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="mb-3">Article Details</h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><strong><i class="fas fa-link me-2"></i>URL:</strong></p>
+                            <a href="{{ article.url }}" target="_blank" class="text-break">
+                                {{ article.url }}
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <p><strong><i class="fas fa-smile me-2"></i>Sentiment:</strong></p>
+                            <span class="badge bg-info">{{ article.sentiment }}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <p><strong><i class="fas fa-language me-2"></i>Article Language:</strong></p>
+                            <span class="badge bg-secondary">{{ article.article_language }}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <p><strong><i class="fas fa-language me-2"></i>Summary Language:</strong></p>
+                            <span class="badge bg-secondary">{{ article.summary_language }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                {% if article.top_image %}
+                <div class="mb-4 text-center">
+                    <img src="{{ article.top_image }}" alt="Article Image" class="img-fluid rounded shadow" style="max-height: 350px;">
+                </div>
+                {% endif %}
+
+                <div class="mb-4">
+                    <h5 class="mb-3">Summary</h5>
+                    <div class="p-3 bg-light rounded">
+                        {{ article.summary|default("No summary available.") }}
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                    </a>
+                    <a href="{{ url_for('upload_article') }}" class="btn btn-gradient">
+                        <i class="fas fa-plus me-2"></i>New Article
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.btn-gradient {
+    background: linear-gradient(90deg, #6366f1 0%, #312e81 100%);
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+.btn-gradient:hover {
+    background: linear-gradient(90deg, #312e81 0%, #6366f1 100%);
+    color: #fff;
+}
+</style>
+{% endblock %} 

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h2 class="mb-4">Processing Article</h2>
+                    <div class="spinner-border text-primary mb-4" role="status" style="width: 3rem; height: 3rem;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="lead">Please wait while we process your article...</p>
+                    <p class="text-muted">This may take a few moments depending on the article length and complexity.</p>
+                    <div class="progress mt-4" style="height: 4px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Start processing the article
+    fetch('/process-article', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            'url': '{{ url }}',
+            'word_count': '{{ word_count }}',
+            'language': '{{ language }}'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            window.location.href = '/upload?error=' + encodeURIComponent(data.error);
+        } else if (data.redirect) {
+            window.location.href = data.redirect;
+        }
+    })
+    .catch(error => {
+        window.location.href = '/upload?error=' + encodeURIComponent('An error occurred while processing the article');
+    });
+});
+</script>
+{% endblock %} 

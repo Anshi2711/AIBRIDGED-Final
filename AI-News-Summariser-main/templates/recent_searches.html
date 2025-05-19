@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Recent Searches - AIBridged{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-4 text-primary fw-bold">
+                <i class="fas fa-history me-2"></i>Recent Searches
+            </h1>
+        </div>
+    </div>
+
+    {% if searches %}
+    <div class="row">
+        {% for search in searches|reverse %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                {% if search.top_image %}
+                <img src="{{ search.top_image }}" class="card-img-top" alt="Article thumbnail" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ search.title }}</h5>
+                    <p class="card-text text-muted">
+                        <small>
+                            <i class="fas fa-calendar me-1"></i>{{ search.date }}
+                            <span class="mx-2">|</span>
+                            <i class="fas fa-language me-1"></i>{{ search.article_language }}
+                            <span class="mx-2">|</span>
+                            <i class="fas fa-file-alt me-1"></i>{{ search.word_count }} words
+                        </small>
+                    </p>
+                    <p class="card-text">
+                        <span class="badge bg-primary me-2">{{ search.sentiment }}</span>
+                        <span class="badge bg-info">{{ search.summary_language }}</span>
+                    </p>
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('view_article', id=search.id) }}" class="btn btn-gradient">
+                            <i class="fas fa-eye me-2"></i>View Summary
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-info" role="alert">
+                <i class="fas fa-info-circle me-2"></i>No recent searches found. Start by summarizing an article!
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row mt-4">
+        <div class="col">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+.btn-gradient {
+    background: linear-gradient(90deg, #6366f1 0%, #312e81 100%);
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+.btn-gradient:hover {
+    background: linear-gradient(90deg, #312e81 0%, #6366f1 100%);
+    color: #fff;
+}
+.card {
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.badge {
+    font-size: 0.9em;
+    padding: 0.5em 1em;
+}
+</style>
+{% endblock %} 
